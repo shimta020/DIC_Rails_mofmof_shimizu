@@ -13,9 +13,9 @@
 ActiveRecord::Schema.define(version: 2021_02_13_055941) do
 
   create_table "properties", force: :cascade do |t|
-    t.string "name"
+    t.text "name"
     t.integer "rent"
-    t.string "address"
+    t.text "address"
     t.integer "age"
     t.text "notes"
     t.datetime "created_at", null: false

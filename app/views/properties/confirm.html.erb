@@ -1,0 +1,15 @@
+<h2>以下の内容で送信してよろしいですか？</h2>
+<%= form_with(model: @property,url: properties_path, local: true) do |form| %>
+  <%= form.hidden_field :name %>
+  <%= form.hidden_field :rent %>
+  <%= form.hidden_field :address %>
+  <%= form.hidden_field :age %>
+  <%= form.hidden_field :notes %>
+  <p>物件名：<%= @property.name %></p>
+  <p>賃料：<%= converting_to_jpy(@property.rent) %></p>
+  <p>住所：<%= @property.address %></p>
+  <p>築年数：<%= @property.age %>年</p>
+  <p>備考：<%= @property.notes %></p>
+  <%= form.submit  "登録する" %>
+  <%= form.submit "戻る", name: 'back' %>
+<% end %>
