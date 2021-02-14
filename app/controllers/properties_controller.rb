@@ -5,6 +5,7 @@ class PropertiesController < ApplicationController
   end
   def new
     @property = Property.new
+    @property.stations.build
   end
   def create
     @property = Property.new(property_params)
@@ -36,10 +37,12 @@ class PropertiesController < ApplicationController
   end
   def confirm
     @property = Property.new(property_params)
+    render :new if @property.invalid?
   end
   private
   def property_params
-    params.require(:property).permit(:name, :rent, :address, :age, :notes)
+    params.require(:property).permit(:name, :rent, :address, :age, :notes,
+                                      stations_attributes: [:line_name, :station_name, :on_foot, :property_id, :_destroy])
   end
   def set_property
     @property = Property.find(params[:id])
