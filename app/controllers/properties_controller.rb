@@ -18,7 +18,9 @@ class PropertiesController < ApplicationController
   def show
   end
   def edit
-    @property.stations.build
+    if @property.stations.count < 2
+      @property.stations.build
+    end
   end
   def update
     if @property.update(property_params)
