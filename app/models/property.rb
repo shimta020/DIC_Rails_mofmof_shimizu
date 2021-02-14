@@ -5,5 +5,5 @@ class Property < ApplicationRecord
   validates :age, presence: true, numericality: { only_integer: true }, length: { maximum: 4 }
   validates :notes, presence: true, length: { maximum: 300 }
   has_many :stations, dependent: :destroy
-  accepts_nested_attributes_for :stations, allow_destroy: true
+  accepts_nested_attributes_for :stations, allow_destroy: true, reject_if: :all_blank
 end
