@@ -1,0 +1,52 @@
+<%= form_with(model:@property, local: true) do |form| %>
+  <% if @property.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= @property.errors.count %>件のエラーがあります</h2>
+      <ul>
+        <% @property.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="property_name">
+    <p>物件名</p>
+    <%= form.text_field :name %>
+  </div>
+  <div class="property_rent">
+    <p>賃料</p>
+    <%= form.text_field :rent %><span>円</span>
+  </div>
+  <div class="property_address">
+    <p>住所</p>
+    <%= form.text_field :address %>
+  </div>
+  <div class="property_age">
+    <p>築年数</p>
+    <%= form.text_field :age %><span>年</span>
+  </div>
+  <div class="property_notes">
+    <p>備考</p>
+    <%= form.text_area :notes %>
+  </div>
+  <hr>
+  <% n = 1 %>
+  <%= form.fields_for :stations do |station| %>
+  <h3>最寄り駅<%= n %></h3>
+    <div class="station_l_name">
+      <p>路線名</p>
+      <%= station.text_field :line_name %>
+    </div>
+    <div class="station_s_name">
+      <p>駅名</p>
+      <%= station.text_field :station_name %>
+    </div>
+    <div class="station_on_foot">
+      <p>徒歩分数</p>
+      <%= station.text_field :on_foot %><span>分</span>
+    </div>
+    <% n += 1 %>
+  <% end %>
+  <%= form.submit '登録する' %>
+<% end %>
+<%= link_to '戻る', properties_path %>
